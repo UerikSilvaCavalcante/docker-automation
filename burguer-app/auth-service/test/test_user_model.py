@@ -42,7 +42,7 @@ def test_serialize_user_incompleto():
     assert resultado == esperado
 
 
-def test_serialize_user_completo():
+def test_serialize_user_vazio():
  
     user = {}
     resultado = serialize_user(user)
