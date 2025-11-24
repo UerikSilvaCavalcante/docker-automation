@@ -6,95 +6,95 @@ on:
   pull_request:
     branches: ["aula-1"]
 
-  jobs:
-    test-auth-service:
-      runs-on: ubuntu-latest
-      steps:
-        - name: 📦 Checkout do codigo
-          uses: actions/checkout@v4
+jobs:
+  test-auth-service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📦 Checkout do codigo
+        uses: actions/checkout@v4
 
-        - name: 🐍 Configurar Python 3.12
-          uses: actions/setup-python@v5
-          with:
-            python-version: '3.12.4'
+      - name: 🐍 Configurar Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.4'
+      
+      - name: 📚 Instalar dependências do auth-service
+        working-directory: ./burguer-app/auth-service
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
         
-        - name: 📚 Instalar dependências do auth-service
-          working-directory: ./burguer-app/auth-service
-          run: |
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
-          
-        - name: Run tests
-          working-directory: ./burguer-app/auth-service
-          run: |
-            pytest -v -vv --cov=models --cov=services --cov=config --cov=controllers
-            radon cc ./models
+      - name: Run tests
+        working-directory: ./burguer-app/auth-service
+        run: |
+          pytest -v -vv --cov=models --cov=services --cov=config --cov=controllers
+          radon cc ./models
 
-    test-product-service:
-      runs-on: ubuntu-latest
-      steps:
-        - name: 📦 Checkout do codigo
-          uses: actions/checkout@v4
+  test-product-service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📦 Checkout do codigo
+        uses: actions/checkout@v4
 
-        - name: 🐍 Configurar Python 3.1
-          uses: actions/setup-python@v2
-          with:
-            python-version: '3.12.4'
+      - name: 🐍 Configurar Python 3.1
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12.4'
+      
+      - name: 📚 Instalar dependências do product-service
+        working-directory: ./burguer-app/product-service
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
         
-        - name: 📚 Instalar dependências do product-service
-          working-directory: ./burguer-app/product-service
-          run: |
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
-          
-        - name: Run tests
-          working-directory: ./burguer-app/product-service
-          run: |
-            pytest -v -vv --cov=models --cov=services --cov=config --cov=controllers
-            radon cc ./models
+      - name: Run tests
+        working-directory: ./burguer-app/product-service
+        run: |
+          pytest -v -vv --cov=models --cov=services --cov=config --cov=controllers
+          radon cc ./models
 
-    test-user-service:
-      runs-on: ubuntu-latest
-      steps:
-        - name: 📦 Checkout do codigo
-          uses: actions/checkout@v4
+  test-user-service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📦 Checkout do codigo
+        uses: actions/checkout@v4
 
-        - name: 🐍 Configurar Python 3.1
-          uses: actions/setup-python@v2
-          with:
-            python-version: '3.12.4'
+      - name: 🐍 Configurar Python 3.1
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12.4'
+      
+      - name: 📚 Instalar dependências do user-service
+        working-directory: ./burguer-app/user-service
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
         
-        - name: 📚 Instalar dependências do user-service
-          working-directory: ./burguer-app/user-service
-          run: |
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
-          
-        - name: Run tests
-          working-directory: ./burguer-app/user-service
-          run: |
-            pytest -v -vv --cov=models --cov=services --cov=config --cov=controllers
-            radon cc ./models
+      - name: Run tests
+        working-directory: ./burguer-app/user-service
+        run: |
+          pytest -v -vv --cov=models --cov=services --cov=config --cov=controllers
+          radon cc ./models
 
-    test-order-service:
-      runs-on: ubuntu-latest
-      steps:
-        - name: 📦 Checkout do codigo
-          uses: actions/checkout@v4
+  test-order-service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📦 Checkout do codigo
+        uses: actions/checkout@v4
 
-        - name: 🐍 Configurar Python 3.1
-          uses: actions/setup-python@v2
-          with:
-            python-version: '3.12.4'
+      - name: 🐍 Configurar Python 3.1
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12.4'
+      
+      - name: 📚 Instalar dependências do order-service
+        working-directory: ./burguer-app/order-service
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
         
-        - name: 📚 Instalar dependências do order-service
-          working-directory: ./burguer-app/order-service
-          run: |
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
-          
-        - name: Run tests
-          working-directory: ./burguer-app/order-service
-          run: |
-            pytest -v -vv --cov=models --cov=services --cov=config --cov=controllers
-            radon cc ./models
+      - name: Run tests
+        working-directory: ./burguer-app/order-service
+        run: |
+          pytest -v -vv --cov=models --cov=services --cov=config --cov=controllers
+          radon cc ./models
