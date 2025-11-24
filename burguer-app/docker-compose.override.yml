@@ -1,4 +1,3 @@
-
 services:
   # ✅ Mongo containerizado (DEV)
   mongo:
@@ -13,7 +12,7 @@ services:
     volumes:
       - mongo_data:/data/db
     networks:
-      - microservices-network
+      - microservices-networks
 
   # ✅ Sobrescreve as envs dos microserviços para usar o Mongo local
   auth-service:

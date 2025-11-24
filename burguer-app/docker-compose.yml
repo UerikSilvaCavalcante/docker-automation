@@ -1,4 +1,4 @@
-version: '3.9'
+version: "2.2"
 
 services:
   auth-service:
@@ -9,9 +9,9 @@ services:
     ports:
       - "5000:5000"
     env_file:
-      - ./auth-service/.env
+      - "./auth-service/.env"
     networks:
-      - microservices-network
+      - microservices-networks
 
   user-service:
     build:
@@ -21,9 +21,9 @@ services:
     ports:
       - "5001:5001"
     env_file:
-      - ./user-service/.env
+      - "./user-service/.env"
     networks:
-      - microservices-network
+      - microservices-networks
 
   order-service:
     build:
@@ -33,9 +33,9 @@ services:
     ports:
       - "5002:5002"
     env_file:
-      - ./order-service/.env
+      - "./order-service/.env"
     networks:
-      - microservices-network
+      - microservices-networks
 
   product-service:
     build:
@@ -45,10 +45,11 @@ services:
     ports:
       - "5003:5003"
     env_file:
-      - ./product-service/.env
+      - "./product-service/.env"
     networks:
-      - microservices-network
+      - microservices-networks
 
+  
 networks:
-  microservices-network:
+  microservices-networks:
     driver: bridge
