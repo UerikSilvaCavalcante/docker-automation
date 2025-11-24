@@ -26,9 +26,9 @@ jobs:
             docker-compose --version
           fi
 
-      - name:  Mascarar variáveis de ambiente sensíveis
+      - name: Mascarar variáveis de ambiente sensíveis
         run: |
-          echo "::add-mask::${{ secrets.MONGO_URI }}"  
+          echo "::add-mask::${{ secrets.MONGO_URI }}"
 
       - name: Cria .env para todos os serviços
         working-directory: burguer-app
@@ -117,3 +117,26 @@ jobs:
         working-directory: burguer-app/product-service
         run: |
           trivy image --severity HIGH --severity CRITICAL burguer-app-product-service:latest
+
+      - name: Roolback
+        if: failure()
+        working-directory: burguer-app
+        run: |
+          echo "Roolback automatico: usado as imagens anteriores"
+          for service in auth-service user-service order-service product-service; do
+            PREV_TAG=$(docker images burguer-app-${service} --format "{{.Tag}}" | grep -v latest | head -n 2)
+            if [ -z "$PREV_TAG"]; then
+              echo "Nenhuma imagem anteriores encontrada para $service"
+            else
+              docker tag burguer-app-${service}:${PREV_TAG} burguer-app-${service}:latest
+              echo "Imagem anteriores para $service: $PREV_TAG"
+            fi
+          done
+
+          docker-compose -f docker-compose.yml -f docker-compose.override.yml down
+
+          for service in auth-service user-service order-service product-service; do
+            docker build -t burguer-app-${service}:${{ env.IMAGE_TAG }} ./$service
+            docker tag burguer-app-${service}:${{ env.IMAGE_TAG }} burguer-app-${service}:latest
+          done
+          docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d --build
