@@ -2,9 +2,9 @@ name: Teste Microservices
 
 on:
   push:
-    branches: ["aula-1"]
+    branches: [aula-1]
   pull_request:
-    branches: ["aula-1"]
+    branches: [aula-1]
 
   jobs:
     test-auth-service:
@@ -16,14 +16,14 @@ on:
         - name: 🐍 Configurar Python 3.12
           uses: actions/setup-python@v5
           with:
-            python-version: '3.12.4'
-        
+            python-version: "3.12.4"
+
         - name: 📚 Instalar dependências do auth-service
           working-directory: ./burguer-app/auth-service
           run: |
             python -m pip install --upgrade pip
             pip install -r requirements.txt
-          
+
         - name: Run tests
           working-directory: ./burguer-app/auth-service
           run: |
@@ -39,14 +39,14 @@ on:
         - name: 🐍 Configurar Python 3.1
           uses: actions/setup-python@v2
           with:
-            python-version: '3.12.4'
-        
+            python-version: "3.12.4"
+
         - name: 📚 Instalar dependências do product-service
           working-directory: ./burguer-app/product-service
           run: |
             python -m pip install --upgrade pip
             pip install -r requirements.txt
-          
+
         - name: Run tests
           working-directory: ./burguer-app/product-service
           run: |
@@ -62,14 +62,14 @@ on:
         - name: 🐍 Configurar Python 3.1
           uses: actions/setup-python@v2
           with:
-            python-version: '3.12.4'
-        
+            python-version: "3.12.4"
+
         - name: 📚 Instalar dependências do user-service
           working-directory: ./burguer-app/user-service
           run: |
             python -m pip install --upgrade pip
             pip install -r requirements.txt
-          
+
         - name: Run tests
           working-directory: ./burguer-app/user-service
           run: |
@@ -85,14 +85,14 @@ on:
         - name: 🐍 Configurar Python 3.1
           uses: actions/setup-python@v2
           with:
-            python-version: '3.12.4'
-        
+            python-version: "3.12.4"
+
         - name: 📚 Instalar dependências do order-service
           working-directory: ./burguer-app/order-service
           run: |
             python -m pip install --upgrade pip
             pip install -r requirements.txt
-          
+
         - name: Run tests
           working-directory: ./burguer-app/order-service
           run: |
