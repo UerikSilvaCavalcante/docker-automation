@@ -32,6 +32,7 @@ jobs:
           echo "MONGO_URI=${{ secrets.MONGO_URI }}" > product-service/.env
 
       - name: Docker compose up
+        working-directory: burguer-app
         run: |
           docker-compose -f docker-compose.yml -f docker-compose.override.yml down
           docker-compose -f docker-compose.yml -f docker-compose.override.yml up
