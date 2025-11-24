@@ -41,5 +41,5 @@ jobs:
 
       - name: Shut down Docker conteiners
         working-directory: burguer-app
-          run: |
-            docker-compose -f docker-compose.yml -f docker-compose.override.yml down
+        run: |
+          docker-compose -f docker-compose.yml -f docker-compose.override.yml down
